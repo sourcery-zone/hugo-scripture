@@ -1,0 +1,8 @@
+{{ with site.RegularPages.Related . | first 5 }}
+<h2>Related content</h2>
+<ul>
+  {{ range . }}
+  {{ partial "postCard" . }}
+  {{ end }}
+</ul>
+{{ end }}

@@ -1,0 +1,49 @@
+:root {
+  --theme-name: "Modus Vivendi";
+
+  /* Base tones */
+  --black: #000000;
+  --charcoal: #1e1e1e;
+  --gray-dark: #535353;
+  --gray-mid: #5a5a5a;
+  --gray-light: #989898;
+  --text-primary: #cad3f5;
+  --white: #ffffff;
+
+  /* Accents */
+  --red-light: #ff7f8f;
+  --red: #ff5f59;
+  --yellow: #d0bc00;
+  --tan: #dfaf7a;
+  --green: #44bc44;
+  --mint: #6ae4b9;
+  --blue: #00bcff;
+  --violet: #b6a0ff;
+  --pink: #feacd0;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+nav a {
+  font-size: 1.2rem;
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--yellow);
+}
+
+.subtitle {
+  color: var(--gray-light);
+}
+
+a {
+  color: var(--mint) !important;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--blue) !important;
+}

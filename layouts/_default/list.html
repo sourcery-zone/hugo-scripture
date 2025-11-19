@@ -1,0 +1,12 @@
+{{ define "main" }}
+<section>
+  <h1>{{ .Title }}</h1>
+  <p class="subtitle">All Articles</p>
+  {{ .Content }}
+  {{ range .Pages }}
+  <ul>
+    {{ partial "postCard" . }}
+  </ul>
+  {{ end }}
+</section>
+{{ end }}

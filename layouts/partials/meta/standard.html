@@ -1,0 +1,123 @@
+{{/* ===================== Base meta ===================== */}}
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{ if or (eq .Kind "taxonomy") (eq .Kind "term") }}
+  <meta name="robots" content="noindex,follow">
+{{ end }}
+<title itemprop="name">{{- if .Title }}{{ .Title }} | {{ end -}}{{ .Site.Title }}</title>
+
+{{- $pageTitle := "" -}}
+{{- if .Title -}}
+  {{-  $pageTitle = printf "%s | %s" .Title .Site.Title -}}
+{{-  else -}}
+  {{-  $pageTitle = .Site.Title -}}
+{{- end -}}
+<meta property="og:title" content="{{ $pageTitle }}" />
+<meta name="twitter:title" content="{{ $pageTitle }}" />
+<meta itemprop="name" content="{{ $pageTitle }}" />
+<meta name="application-name" content="{{ $pageTitle }}" />
+<meta property="og:site_name" content="{{ .Site.Params.sitename }}" />
+
+{{/* ===================== Description ===================== */}}
+{{- $description := "" -}}
+{{- if .Params.description -}}
+  {{- $description = trim .Params.description "\n" -}}
+{{- else if .Site.Params.description -}}
+  {{- $description = trim .Site.Params.description "\n" -}}
+{{- end -}}
+
+<meta name="description" content="{{ $description }}">
+<meta itemprop="description" content="{{ $description }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta name="twitter:description" content="{{ $description }}" />
+
+<meta property="og:locale" content="{{ .Site.LanguageCode }}" />
+<meta name="language" content="{{ .Site.LanguageCode }}" />
+{{- range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ .Language.LanguageName }}" />
+{{- end }}
+
+{{/* ===================== Image selection ===================== */}}
+{{- $image := "" -}}
+
+{{- with .Params.image }}                 {{ $image = . }} {{ end -}}
+{{- if not $image }}{{ with .Params.featuredImage }} {{ $image = . }} {{ end }}{{ end -}}
+{{- if not $image }}{{ with .Params.cover }}         {{ $image = . }} {{ end }}{{ end -}}
+{{- if not $image }}{{ with index .Params.images 0 }}{{ $image = . }} {{ end }}{{ end -}}
+
+{{- if and (not $image) .IsPage -}}
+  {{- with or (.Resources.GetMatch "cover*") (.Resources.GetMatch "featured*") -}}
+    {{- $image = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* ===================== Fallback: generate OG locally ===================== */}}
+{{- if not $image -}}
+  {{- $bg := resources.Get "og/base.png" -}} {{/* put your background at assets/og/base.png */}}
+  {{- if $bg -}}
+    {{- with .Resources.GetMatch "og-bg*" -}} {{ $bg = . }} {{ end -}}
+
+    {{- $title := .Title -}}
+    {{- if not $title }}{{ $title = .Site.Title }}{{ end -}}
+
+    {{- $slug := "" -}}
+    {{- if .File -}}
+      {{- $slug = .File.BaseFileName -}}
+    {{- else -}}
+      {{- $slug = .Title | urlize -}}
+    {{- end -}}
+
+    {{- $outName := printf "og/%s-og.png" $slug -}}
+
+    {{- $font := resources.Get "fonts/et-book.ttf" -}}
+
+    {{- $titleOpts := dict
+      "size" 85
+      "color" "#cf5236"
+      "x" 420
+      "y" 75
+    -}}
+
+    {{- $descOpts := dict
+      "size" 30
+      "color" "#cf5236"
+      "x" 470
+      "y" 570
+      "anchor" "center"
+    -}}
+
+    {{- if $font }}{{ $titleOpts = merge $titleOpts (dict "font" $font) }}{{ end -}}
+    {{- if $font }}{{ $descOpts = merge $descOpts (dict "font" $font) }}{{ end -}}
+
+    {{- $img := $bg | images.Filter (images.Text ($title | title) $titleOpts) -}}
+    {{- $img := $img | images.Filter (images.Text ($description | title) $descOpts) -}}
+
+    {{- if lt $img.Width 1200 -}}
+      {{- $img = $img.Fit "1200x630" -}}
+    {{- end -}}
+
+    {{- $final := $img | resources.Copy $outName -}}
+    {{- $image = $final.Permalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $imageAbs := cond (hasPrefix $image "http") $image (absURL $image) -}}
+{{- $imageAlt := .Params.imageAlt | default .Title -}}
+
+{{/* ===================== Social image tags ===================== */}}
+{{- if $imageAbs -}}
+  <meta itemprop="image" content="{{ $imageAbs }}">
+  <meta property="og:image" content="{{ $imageAbs }}">
+  <meta name="twitter:image" content="{{ $imageAbs }}">
+  <meta name="twitter:image:src" content="{{ $imageAbs }}">
+  <meta property="og:image:alt" content="{{ $imageAlt }}">
+  <meta name="twitter:image:alt" content="{{ $imageAlt }}">
+  <meta name="twitter:card" content="summary_large_image">
+{{- end -}}
+
+{{/* Optional: width and height when using a page resource cover.* to help crawlers */}}
+{{- with .Resources.GetMatch "cover*" -}}
+  <meta property="og:image:width" content="{{ .Width }}">
+  <meta property="og:image:height" content="{{ .Height }}">
+{{- end -}}
