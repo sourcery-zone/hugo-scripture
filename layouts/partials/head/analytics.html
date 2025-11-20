@@ -1,10 +1,11 @@
 {{ with .Site.Params.umami }}
     {{ if .enabled }}
-        {{ range .scripts }}
+        {{ $umami := . }}
+        {{ range $script := $umami.scripts }}
             <script
                 defer
-                src="{{ . }}"
-                data-website-id="{{ $.websiteId }}">
+                src="{{ $script }}"
+                data-website-id="{{ $umami.websiteId }}">
             </script>
         {{ end }}
     {{ end }}
