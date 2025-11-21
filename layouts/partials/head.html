@@ -9,7 +9,7 @@
     <meta name="fediverse:creator" content="{{ . }}">
 {{ end }}
 {{ with .Site.Params.webmentionEndpoint }}
-    <link rel="webmention" href="{{ . }}">
+    <link rel="pingback" href="{{ . }}">
 {{ end }}
 {{ with .Site.Params.mastodonProfile }}
     <link rel="me" href="{{ . }}">
