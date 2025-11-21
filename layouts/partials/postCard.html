@@ -1,6 +1,8 @@
+{{ $uid := printf "%s-%s" .RelPermalink .Title | md5 }}
 <li language="{{ .Params.language | default "en" }}" dir="auto">
-  <label for="mn-demo" class="margin-toggle">&#8853;</label>
-  <a id="mn-demo" href="{{ .RelPermalink }}">{{ .Title }}</a>
+  <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  <label for="{{ $uid }}" class="margin-toggle muted">…</label>
+  <input id="{{ $uid }}" class="margin-toggle" type="checkbox">
   <span class="marginnote">
     {{/* format date string to create an ISO 8601 string */}}
     {{ $ISO_date := "2006-01-02T15:04:05Z0700" }}

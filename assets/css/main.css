@@ -47,3 +47,7 @@ a {
 a:hover {
   color: var(--blue) !important;
 }
+
+.muted {
+    color: var(--gray-mid);
+}

@@ -1,5 +1,7 @@
-<label for="{{ .Get `id` }}" class="margin-toggle sidenote-number"></label>
-<input type="checkbox" id="{{ .Get `id` }}" class="margin-toggle" />
-<span class="sidenote {{ if eq (.Get `side`) `left`}}left{{ end }}">
-  {{ .Inner }}
+{{ $uid := printf "%s-%s" .Page.RelPermalink .Inner | md5 }}
+
+<label for="{{ $uid }}" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="{{ $uid }}" class="margin-toggle" />
+<span class="sidenote">
+    {{ .Inner | markdownify }}
 </span>
