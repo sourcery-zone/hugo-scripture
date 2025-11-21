@@ -4,3 +4,13 @@
 {{ partialCached "head/js.html" . }}
 {{ partialCached "head/favicon.html" . }}
 {{ partialCached "head/analytics.html" . }}
+
+{{ with .Site.Params.fediverseCreator }}
+    <meta name="fediverse:creator" content="{{ . }}">
+{{ end }}
+{{ with .Site.Params.webmentionEndpoint }}
+    <link rel="webmention" href="{{ . }}">
+{{ end }}
+{{ with .Site.Params.mastodonProfile }}
+    <link rel="me" href="{{ . }}">
+{{ end }}
