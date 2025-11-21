@@ -8,7 +8,10 @@
 {{ with .Site.Params.fediverseCreator }}
     <meta name="fediverse:creator" content="{{ . }}">
 {{ end }}
-{{ with .Site.Params.webmentionEndpoint }}
+{{ with .Site.Params.webmention.endpoint }}
+    <link rel="webmention" href="{{ . }}">
+{{ end }}
+{{ with .Site.Params.webmention.pingback }}
     <link rel="pingback" href="{{ . }}">
 {{ end }}
 {{ with .Site.Params.mastodonProfile }}
