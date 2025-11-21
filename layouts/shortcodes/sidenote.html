@@ -3,5 +3,5 @@
 <label for="{{ $uid }}" class="margin-toggle sidenote-number"></label>
 <input type="checkbox" id="{{ $uid }}" class="margin-toggle" />
 <span class="sidenote">
-    {{ .Inner | markdownify }}
+    {{ .Inner | strings.TrimSpace | .Page.RenderString }}
 </span>
