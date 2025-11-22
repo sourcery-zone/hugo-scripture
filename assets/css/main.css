@@ -51,3 +51,8 @@ a:hover {
 .muted {
     color: var(--gray-mid);
 }
+
+.identity {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 0.9rem;
+}
