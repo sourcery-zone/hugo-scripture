@@ -2,7 +2,7 @@
 {{- $fpr := .Site.Params.gpgFingerprint -}}
 
 {{ if and $keyoxide $fpr }}
-<div class="identityq">
+<div class="identity">
     🛡 Identity: <a href="{{ $keyoxide }}" target="_blank" rel="noopener noreferrer">{{ $fpr }}</a>
 </div>
 <br/>
