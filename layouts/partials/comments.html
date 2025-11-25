@@ -1,0 +1,77 @@
+{{ if and .Site.Params.comments.enable (not .Params.hideComments) }}
+
+  {{/* Per-post links */}}
+  {{ $mastodonURL   := .Params.mastodon_url }}
+  {{ $bskyURL       := .Params.bsky_url }}
+  {{ $hackerNewsURL := .Params.hackernews_url }}
+
+  {{/* Global channels */}}
+  {{ $matrixURL := .Site.Params.comments.matrixUrl }}
+  {{ $ircURL    := .Site.Params.comments.ircUrl }}
+
+  {{ $showMatrix := .Site.Params.comments.showMatrix | default false }}
+  {{ $showIRC    := .Site.Params.comments.showIRC | default false }}
+
+  {{ if not $showMatrix }}{{ $matrixURL = "" }}{{ end }}
+  {{ if not $showIRC }}{{ $ircURL = "" }}{{ end }}
+
+  {{ if or (or (or $mastodonURL $bskyURL) (or $hackerNewsURL $matrixURL)) $ircURL }}
+
+    <section class="post-discussion">
+      <h2>Share your thoughts</h2>
+
+      <p>Pull up a chair and chat with me wherever you’re most comfortable:</p>
+
+      <ul>
+
+        {{ if $mastodonURL }}
+          <li>
+            <strong>Mastodon</strong>
+            <span>- the cozy corner of the fediverse</span><br>
+            <a href="{{ $mastodonURL }}">{{ $mastodonURL }}</a>
+          </li>
+        {{ end }}
+
+        {{ if $bskyURL }}
+          <li>
+            <strong>Bluesky</strong>
+            <span>- algorithm-free oxygen</span><br>
+            <a href="{{ $bskyURL }}">{{ $bskyURL }}</a>
+          </li>
+        {{ end }}
+
+        {{ if $hackerNewsURL }}
+          <li>
+            <strong>Hacker News</strong>
+            <span>- enter at your own risk</span><br>
+            <a href="{{ $hackerNewsURL }}">{{ $hackerNewsURL }}</a>
+          </li>
+        {{ end }}
+
+        {{ if $matrixURL }}
+          <li>
+            <strong>Matrix</strong>
+            <span>- the chatroom for actual humans</span><br>
+            <a href="{{ $matrixURL }}">{{ $matrixURL }}</a>
+          </li>
+        {{ end }}
+
+        {{ if $ircURL }}
+          <li>
+            <strong>IRC</strong>
+            <span>- for the ancients</span><br>
+            <a href="{{ $ircURL }}">{{ $ircURL }}</a>
+          </li>
+        {{ end }}
+
+        <li>
+          <strong>Hate or trolling</strong>
+          <span>- piped straight to <code>/dev/null</code></span>
+        </li>
+
+      </ul>
+    </section>
+
+  {{ end }}
+
+{{ end }}

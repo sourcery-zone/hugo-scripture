@@ -12,6 +12,7 @@
 
     {{ .Content }}
     {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+    {{ partial "comments.html" . }}
     {{ partial "related.html" . }}
   </section>
 {{ end }}

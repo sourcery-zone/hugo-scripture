@@ -21,3 +21,13 @@ weight = 30
   [module.hugoVersion]
     extended = false
     min = "0.116.0"
+
+[params.comments]
+enable = true
+
+# Global Matrix + IRC channels (same for all posts)
+matrixUrl = "https://matrix.to/#/#sourcery-zone:example.org"
+ircUrl    = "https://web.libera.chat/#sourcery-zone"
+
+showMatrix = true
+showIRC    = true
