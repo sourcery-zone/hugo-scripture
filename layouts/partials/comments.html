@@ -25,50 +25,44 @@
 
       <ul>
         {{ if $youtubeURL }}
-          <li>
-            <strong>YouTube</strong>
-            <span>- the big, busy video town square</span><br>
-            <a href="{{ $youtubeURL }}" target="_blank" rel="noopener noreferrer">{{ $youtubeURL }}</a>
-          </li>
+        <li>
+          <strong><a href="{{ $youtubeURL }}" target="_blank" rel="noopener noreferrer">YouTube</a></strong>
+          <span>- the big, busy video town square</span><br>
+        </li>
         {{ end }}
 
         {{ if $mastodonURL }}
           <li>
-            <strong>Mastodon</strong>
+            <strong><a href="{{ $mastodonURL }}" target="_blank" rel="noopener noreferrer">Mastodon</a></strong>
             <span>- the cozy corner of the fediverse</span><br>
-            <a href="{{ $mastodonURL }}" target="_blank" rel="noopener noreferrer">{{ $mastodonURL }}</a>
           </li>
         {{ end }}
 
         {{ if $bskyURL }}
           <li>
-            <strong>Bluesky</strong>
+            <strong><a href="{{ $bskyURL }}" target="_blank" rel="noopener noreferrer">Bluesky</a></strong>
             <span>- algorithm-free oxygen</span><br>
-            <a href="{{ $bskyURL }}" target="_blank" rel="noopener noreferrer">{{ $bskyURL }}</a>
           </li>
         {{ end }}
 
         {{ if $hackerNewsURL }}
           <li>
-            <strong>Hacker News</strong>
+            <strong><a href="{{ $hackerNewsURL }}" target="_blank" rel="noopener noreferrer">Hacker News</a></strong>
             <span>- enter at your own risk</span><br>
-            <a href="{{ $hackerNewsURL }}" target="_blank" rel="noopener noreferrer">{{ $hackerNewsURL }}</a>
           </li>
         {{ end }}
 
         {{ if $matrixURL }}
           <li>
-            <strong>Matrix</strong>
+            <strong><a href="{{ $matrixURL }}" target="_blank" rel="noopener noreferrer">Matrix</a></strong>
             <span>- the chatroom for actual humans</span><br>
-            <a href="{{ $matrixURL }}" target="_blank" rel="noopener noreferrer">{{ $matrixURL }}</a>
           </li>
         {{ end }}
 
         {{ if $ircURL }}
           <li>
-            <strong>IRC</strong>
+            <strong><a href="{{ $ircURL }}" target="_blank" rel="noopener noreferrer">IRC</a></strong>
             <span>- for the ancients</span><br>
-            <a href="{{ $ircURL }}" target="_blank" rel="noopener noreferrer">{{ $ircURL }}</a>
           </li>
         {{ end }}
 
