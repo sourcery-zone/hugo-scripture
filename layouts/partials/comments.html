@@ -4,6 +4,7 @@
   {{ $mastodonURL   := .Params.mastodon_url }}
   {{ $bskyURL       := .Params.bsky_url }}
   {{ $hackerNewsURL := .Params.hackernews_url }}
+  {{ $youtubeURL := .Params.youtube_url }}
 
   {{/* Global channels */}}
   {{ $matrixURL := .Site.Params.comments.matrixUrl }}
@@ -23,6 +24,13 @@
       <p>Pull up a chair and chat with me wherever you’re most comfortable:</p>
 
       <ul>
+        {{ if $youtubeURL }}
+          <li>
+            <strong>YouTube</strong>
+            <span>- the big, busy video town square</span><br>
+            <a href="{{ $youtubeURL }}">{{ $youtubeURL }}</a>
+          </li>
+        {{ end }}
 
         {{ if $mastodonURL }}
           <li>
